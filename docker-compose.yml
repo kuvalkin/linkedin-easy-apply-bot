@@ -1,0 +1,23 @@
+services:
+  bot:
+    context: ./bot
+    volumes:
+      - ./config.yml:/app/config.yml:ro
+      - ./uploads:/app/uploads:ro
+      - ./output:/app/output:rw
+    networks:
+      - linkedin_easy_apply_bot
+
+  browser:
+    image: selenium/standalone-chrome:latest
+    ports:
+      # - 4444:4444 #it seems that its not needed
+      - 7900:7900
+    shm_size: 2g
+    networks:
+      - linkedin_easy_apply_bot
+    alias:
+      - browser
+
+networks:
+  linkedin_easy_apply_bot
