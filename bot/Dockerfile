@@ -8,4 +8,4 @@ RUN pip install -r requirements.txt
 
 COPY ./LinkedIn-Easy-Apply-Bot .
 
-CMD ["python", "main.py"]
+CMD ["sleep", "infinity"]
