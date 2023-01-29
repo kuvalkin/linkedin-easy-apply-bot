@@ -15,7 +15,7 @@ services:
   browser:
     image: selenium/standalone-chrome:latest
     ports:
-      - 4444:4444 #it seems that its not needed
+      - 4444:4444
       - 7900:7900
     shm_size: 2g
     networks:
@@ -28,6 +28,18 @@ services:
       retries: 5
       start_period: 20s
       timeout: 10s
+    
+  video_recorder:
+    image: selenium/video:ffmpeg-4.3.1-20230123
+    volumes:
+      - ./video:/videos
+    depends_on:
+      - browser
+    environment:
+      - DISPLAY_CONTAINER_NAME=browser
+      - FILE_NAME=video_$LI_EAB_NOW.mp4
+    networks:
+      - linkedin_easy_apply_bot
 
 networks:
   linkedin_easy_apply_bot:
